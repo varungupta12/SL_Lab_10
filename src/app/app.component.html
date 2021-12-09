@@ -1,0 +1,36 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span style="margin-left: auto; margin-right: auto;">CALCULATOR</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="openSnackBar('ABOVE:Binary operation, BELOW:Unary operation','CLOSE')">
+      <mat-icon>help</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-card>
+  <div style="text-align: center;">
+    <input placeholder="NUM1" #num1>
+    <input placeholder="NUM2" #num2>
+  </div>
+  <div style="text-align: center;" >
+    <app-addition [num1]="num1.value" [num2]="num2.value" (sendAddition)="getResult($event)" style="display: inline-block;"></app-addition>
+    <app-subtraction [num1]="num1.value" [num2]="num2.value" (sendSubtraction)="getResult($event)" style="display: inline-block;"></app-subtraction>
+    <app-multiplication [num1]="num1.value" [num2]="num2.value" (sendMultiplication)="getResult($event)" style="display: inline-block;"></app-multiplication>
+    <app-division [num1]="num1.value" [num2]="num2.value" (sendDivision)="getResult($event)" style="display: inline-block;"></app-division>
+  </div>
+  <h2 style="text-align: center;">RESULT={{res1}}</h2>
+  <div style="text-align: center;">
+    <input placeholder="NUM3" #num3>
+  </div>
+  <div style="text-align: center;">
+    <app-factorial [num3]="num3.value" (sendFactorial)="getResult2($event)" style="display:inline-block;"></app-factorial>
+    <app-prime [num3]="num3.value" (sendPrime)="getResult2($event)" style="display:inline-block;"></app-prime>
+  </div>
+  <div [ngSwitch]="res2">
+    <h2 style="text-align: center;" *ngSwitchCase="0">Check Prime:Not a Prime!</h2>
+    <h2 style="text-align: center;" *ngSwitchCase="1">Check Prime:Prime Number!</h2>
+    <h2 style="text-align: center;" *ngSwitchDefault>Factorial:{{res2}}</h2>
+  </div>
+
+  <ng-template #other_content>other content here...</ng-template>
+</mat-card>
